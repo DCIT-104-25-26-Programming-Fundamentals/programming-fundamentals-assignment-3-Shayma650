@@ -43,4 +43,67 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+// =============================================================================
+// PROGRAMMING FUNDAMENTALS — Assignment 3
+// Topic: Array Statistics Calculator
+// =============================================================================
 
+const input = require("readline-sync");
+
+function calculateSum(numbers) {
+    let sum = 0;
+
+    for (let i = 0; i < numbers.length; i++) {
+        sum = sum + numbers[i];
+    }
+
+    return sum;
+}
+
+function calculateAverage(numbers) {
+    let sum = calculateSum(numbers);
+    return sum / numbers.length;
+}
+
+function findMaximum(numbers) {
+    let max = numbers[0];
+
+    for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] > max) {
+            max = numbers[i];
+        }
+    }
+
+    return max;
+}
+
+function findMinimum(numbers) {
+    let min = numbers[0];
+
+    for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] < min) {
+            min = numbers[i];
+        }
+    }
+
+    return min;
+}
+
+let n = Number(input.question("How many numbers? "));
+
+if (n <= 0) {
+    console.log("Error: The number of values must be greater than 0.");
+} else {
+
+    let numbers = [];
+
+    for (let i = 0; i < n; i++) {
+        numbers[i] = Number(input.question(`Enter number ${i + 1}: `));
+    }
+
+    console.log("\nResults:");
+    console.log("Sum:     " + calculateSum(numbers));
+    console.log("Average: " + calculateAverage(numbers));
+    console.log("Maximum: " + findMaximum(numbers));
+    console.log("Minimum: " + findMinimum(numbers));
+}
