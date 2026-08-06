@@ -81,4 +81,69 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readlineSync = require('readline-sync');
 
+let tasks = [];
+function displayMenu() {
+  console.log("============================");
+  console.log("      TO-DO LIST MENU");
+  console.log("============================");
+  console.log("1. Add task");
+  console.log("2. View tasks");
+  console.log("3. Delete task");
+  console.log("4. Quit");
+}
+
+function addTask() {
+  let task = readlineSync.question("Enter task: ");
+  tasks.push(task);
+  console.log(`Task added: "${task}"`);
+}
+
+function listTasks() {
+  if (tasks.length === 0) {
+    console.log("No tasks have been added yet.");
+    return;
+  }
+  console.log("Your Tasks:");
+  for (let i = 0; i < tasks.length; i++) {
+    console.log(`${i + 1}. ${tasks[i]}`);
+  }
+}
+
+function deleteTask() {
+  if (tasks.length === 0) {
+    console.log("No tasks have been added yet.");
+    return;
+  }
+  listTasks();
+  let deleteChoice = Number(readlineSync.question("Enter the task number to delete: "));
+
+  if (deleteChoice < 1 || deleteChoice > tasks.length) {
+    console.log("Invalid task number.");
+    return;
+  }
+
+let deletedTask = tasks.splice(deleteChoice - 1, 1);
+  console.log(`Task removed: "${deletedTask}"`);
+}
+
+let running = true;
+
+while (running) {
+  displayMenu();
+  let menuChoice = Number(readlineSync.question("Enter your choice (1-4): "));
+
+  if (menuChoice === 1) {
+    addTask();
+  } else if (menuChoice === 2) {
+    listTasks();
+  } else if (menuChoice === 3) {
+    deleteTask();
+  } else if (menuChoice === 4) {
+    console.log("Thanks for using the To-Do List. Goodbye!");
+    running = false;
+  } else {
+    console.log("Invalid choice. Please enter a number from 1 to 4.");
+  }
+}
